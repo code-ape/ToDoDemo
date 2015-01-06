@@ -1,9 +1,9 @@
 package main
 
 import (
-	log "github.com/Sirupsen/logrus"
 	rand "crypto/rand"
 	hex "encoding/hex"
+	log "github.com/Sirupsen/logrus"
 )
 
 type AuthReq struct {
@@ -12,7 +12,7 @@ type AuthReq struct {
 }
 
 type LogoutReq struct {
-	User string  `json:"user" binding:"required"`
+	User  string `json:"user" binding:"required"`
 	Token string `json:"token" binding:"required"`
 }
 
@@ -34,7 +34,7 @@ func VerifyUserToken(user string, token string) bool {
 func AuthUser(auth_req *AuthReq) (string, bool) {
 	l := log.WithField("User", auth_req.User)
 	l.Info("Authing user.")
-	hash,user_exists := user_lookup[auth_req.User]
+	hash, user_exists := user_lookup[auth_req.User]
 	l.Info("User found: ", user_exists)
 
 	if user_exists && hash == auth_req.Password {
@@ -48,15 +48,15 @@ func AuthUser(auth_req *AuthReq) (string, bool) {
 	}
 }
 
-func  GetUsers() []string {
+func GetUsers() []string {
 	users := make([]string, len(active_tokens))
 
 	i := 0
-	for k,_ := range active_tokens {
+	for k, _ := range active_tokens {
 		users[i] = k
 		i++
 	}
-	
+
 	return users
 }
 
