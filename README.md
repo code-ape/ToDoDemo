@@ -22,6 +22,12 @@ To build the server:
 To run server:
 * `./ToDoDemo`
 
+To login:
+* Go to `http://127.0.0.1:8080`
+* use one of the two users (currently only one instance of each user can be handled at a time):
+    * User: `Foo` Password: `password`
+    * User: `Bar` Password: `password`
+
 
 ### Client
 
