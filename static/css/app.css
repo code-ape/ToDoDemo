@@ -1,0 +1,106 @@
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Custom page header */
+.header {
+  padding-right: 15px;
+  padding-left: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  padding-bottom: 19px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+/* animations */
+.view-container {
+  position: relative;
+}
+
+.view-frame.ng-enter, .view-frame.ng-leave {
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.view-frame.ng-enter {
+  -webkit-animation: 0.5s fade-in;
+  -moz-animation: 0.5s fade-in;
+  -o-animation: 0.5s fade-in;
+  animation: 0.5s fade-in;
+  z-index: 100;
+}
+
+.view-frame.ng-leave {
+  -webkit-animation: 0.5s fade-out;
+  -moz-animation: 0.5s fade-out;
+  -o-animation: 0.5s fade-out;
+  animation: 0.5s fade-out;
+  z-index:99;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-moz-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-webkit-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@-moz-keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@-webkit-keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

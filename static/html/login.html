@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-6">
+		<div class="jumbotron">
+
+			<h2>To-Do App<br><small>By Ferris</small></h2>
+			<p class="text-center">Welcome! Please login.</p>
+
+			<form name="loginForm">
+				<div class="form-group" ng-class="{'has-error': invalid}">
+					<input class="form-control" ng-model=user.name placeholder="Username">
+				</div>
+				<div class="form-group" ng-class="{'has-error': invalid}">
+					<input type="password" class="form-control" ng-model=user.password placeholder="Password">
+				</div>
+				<p class="text-center">
+					<button ng-click="login(user)" class="btn btn-success">Login &raquo;</button>
+				</p>
+			</form>
+			<p ng-show="invalid">Attempt number {{ attempt_number }}.</p>
+			
+		</div>
+	</div>
+</div>
