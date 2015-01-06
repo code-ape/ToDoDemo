@@ -1,0 +1,2 @@
+gom 'github.com/Sirupsen/logrus', :tag => 'v0.6.2'
+gom 'github.com/gin-gonic/gin', :tag => 'v0.4'

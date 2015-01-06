@@ -1,8 +1,8 @@
 
 var todoAppLogin = angular.module('todo.app.login', []);
 
-todoAppLogin.controller('AuthCtrl', ['$scope', '$location','$log', 
-	function ($scope, $location, $log) {
+todoAppLogin.controller('AuthCtrl', ['$scope', '$rootScope', '$location','$http', '$log', 
+	function ($scope, $rootScope, $location, $http, $log) {
 
 		$scope.invalid = false;
 		$scope.attempt_number = 1;
@@ -13,18 +13,25 @@ todoAppLogin.controller('AuthCtrl', ['$scope', '$location','$log',
 				$scope.auth_failed();
 				return;
 			}
-			if (!(user["name"] in user_dict)) {
-				$scope.auth_failed();
-				return;
-			}
 
 			var password_hash = sha256_digest(user["password"]);
-			if (AttemptAuth(user["name"], password_hash)) {
-				$scope.auth_success();
-			} else {
-				$scope.auth_failed(user);
-				return;
-			}
+			
+			$http.post("/api/login", {"user": user["name"], "password": password_hash}).
+				success(function(data, status, headers, config) {
+					if (data["status"] === "success") {
+						$rootScope.auth_token = data["token"];
+						$rootScope.active_user = user["name"];
+						$log.log("Token: " + data["token"]);
+						$scope.auth_success();
+					} else {
+						$scope.auth_failed();
+					}
+				}).
+				error(function(data, status, headers, config) {
+					$log.log("status: " + status)
+					$log.log("data: " + data)
+					$scope.auth_failed();
+				});
 		};
 
 	$scope.auth_success = function () {
@@ -40,8 +47,8 @@ todoAppLogin.controller('AuthCtrl', ['$scope', '$location','$log',
 		};
 	}]);
 
-var user_dict = {"TestUser": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"};
+//var user_dict = {"TestUser": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"};
 
-var AttemptAuth = function(username, password_hash) {
-	return password_hash == user_dict[username];
-};
+//var AttemptAuth = function(username, password_hash) {
+//	return password_hash == user_dict[username];
+//};

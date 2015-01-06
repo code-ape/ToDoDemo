@@ -1,24 +1,48 @@
 
 
-<div class="container">
+<div class="container" ng-init="new_todo=''; new_todo_field=false; refresh();">
 	<div class="header">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-				<li role="presentation"><a href="#">Logout</a></li>
+				<li role="presentation"><button class="btn btn-success" ng-click="logout()">Logout</button></li>
 			</ul>
 		</nav>
 		<h3 class="text-muted">To-Do App</h3>
 	</div>
 	<div class="col-xs-3">
 		<h2>Others Online</h2>
-		<p>[total contributors]</p>
-		<p>[names of other contributors]</p>
+		<p>Online contributors: {{ users.length }}</p>
+		<ul class="list-group">
+			<li ng-repeat-start="user in users" ng-repeat-end class="list-group-item">
+				{{ user }}
+			</li>
+		</ul>
 	</div>
 	<div class="col-xs-9">
-		<div class="jumbotron">
+		<div class="col-xs-6">
 			<h2>To-Do List</h2>
-			<p>In today's world internet is the most popular way of connecting with the people. At <a href="http://www.tutorialrepublic.com" target="_blank">tutorialrepublic.com</a> you will learn the essential of web development technologies along with real life practice example, so that you can create your own website to connect with the people around the world.</p>
-			<p><a href="http://www.tutorialrepublic.com" target="_blank" class="btn btn-success btn-lg">Get started today</a></p>
+		</div>
+		<div class="col-xs-3">
+			<button type="button" class="btn btn-default" ng-click="refresh()">Refresh</button>
+		</div>
+		<div class="col-xs-3">
+			<button type="button" class="btn btn-default" ng-click="new_todo_action()">New To-Do</button>
+		</div>
+		<div class="col-xs-12">
+
+			<ul class="list-group">
+				<li ng-repeat-start="todo in to_dos track by $index" ng-repeat-end class="list-group-item">
+					<span class="badge" >{{ todo["user"] }}</span>
+					{{ todo["text"] }}
+				</li>
+			</ul>
+
+			<form name="todoForm" ng-show="new_todo_field" ng-submit="send_new_todo(new_todo)">
+				<div class="form-group">
+					<input class="form-control" ng-model="new_todo" placeholder="New To-Do"></input>
+				</div>
+			</form>
+
 		</div>
 	</div>
 </div>
